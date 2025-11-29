@@ -1,31 +1,16 @@
-BUNKER CLOTHING — Cinematic Website v3
-=====================================
+BUNKER CLOTHING — Cinematic Website
 
-Includes:
-- A12.1 Sticky header + shrink on scroll
-- A13.1 Smooth fade + slide-up reveals
-- A17.1 White preloader (BUNKER)
-- A17.2 Scroll progress bar (neon green)
-- A17.3 Back-to-top floating button
-- A17.4 Cursor glow FX (desktop only)
-- A17.5 Animation toggle switch with glow pulse
-- Transparent logo: assets/bunker_logo.png
+Included
+- index.html: cinematic layout with preloader, hero reveal, cart drawer, toast, progress, cursor FX, footer toggle
+- style.css / style.min.css: readable + minified styles (accent #33ffaa)
+- script.js / script.min.js: readable + minified scripts
+- assets/bunker_logo.png: transparent logo
+- assets/cart.svg: vector cart icon
+- assets/favicon.png / favicon.ico: transparent neon-green B favicon
+- products.json: placeholder for future product data
+- manifest.json: PWA setup
 
-Edit colors:
-- Accent color in style.css: :root --accent (#00ff88)
-- Background is pure black (#000000)
-
-Disable animations:
-- Footer switch toggles animations ON/OFF
-- Preference is saved in localStorage (bunker_anim_enabled)
-
-Files:
-- index.html   (main site)
-- style.css    (styles & animations)
-- script.js    (interactions & logic)
-- preview.html (opens index.html)
-- assets/bunker_logo.png
-
-Deploy:
-- Upload folder contents to your hosting (GitHub Pages, Netlify, Vercel).
-- Ensure relative paths remain the same.
+How to use
+- Open index.html locally or deploy to GitHub Pages/Netlify/Vercel.
+- Edit colors in :root in style.css (e.g., --accent).
+- Connect checkout in script.js (replace alert in checkoutBtn handler with Stripe/PayPal).
