@@ -317,3 +317,21 @@ footer a:hover {
   color: #00ff88;
   text-shadow: 0 0 8px #00ff88;
 }
+
+
+/* A8 Mobile optimizations */
+@media(max-width:600px){
+  header nav a{font-size:0.8rem;margin:0 6px;}
+  .hero h1,.hero h2{font-size:1.8rem;}
+  .shop-item{padding:0.6rem;}
+}
+
+/* A9 Shop UX */
+.shop-item{transition:transform .3s ease, box-shadow .3s ease;}
+.shop-item:hover{box-shadow:0 0 15px rgba(255,255,255,0.1);}
+
+/* A10 Theme system */
+:root{
+ --accent:#00ff88;
+}
+.btn, nav a:hover{color:var(--accent);}

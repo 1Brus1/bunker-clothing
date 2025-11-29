@@ -52,3 +52,10 @@ function renderCart() {
 
     totalPrice.innerText = `Total: $${total}`;
 }
+
+
+/* A9 Improved shop interactions */
+document.querySelectorAll('.shop-item').forEach(it=>{
+ it.addEventListener('touchstart',()=>it.style.opacity='0.8');
+ it.addEventListener('touchend',()=>it.style.opacity='1');
+});
