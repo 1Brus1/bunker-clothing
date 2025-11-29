@@ -1,267 +1,157 @@
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bunker Clothing</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0d0d0d">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
     :root {
-      --primary: #00ff88; /* green accent */
+      --primary: #00bcd4;
       --bg-dark: #0d0d0d;
       --gray: #aaa;
       --text-light: #f5f5f5;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif;}
 
     body {
       background: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.6;
       scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
     header {
       position: fixed;
+      width: 100%;
       top: 0;
       left: 0;
-      width: 100%;
       background: rgba(0,0,0,0.9);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 20px;
-      z-index: 1000;
-      backdrop-filter: blur(6px);
+      padding: 15px 40px;
+      z-index: 100;
+      backdrop-filter: blur(5px);
     }
 
     header h1 {
-      font-size: 1.3rem;
-      letter-spacing: 2px;
       color: var(--primary);
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-      align-items: center;
+      letter-spacing: 3px;
+      font-size: 1.5rem;
     }
 
     nav a {
       color: var(--text-light);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s;
+      margin-left: 20px;
+      transition: 0.3s;
     }
-
     nav a:hover { color: var(--primary); }
 
     .hero {
-      min-height: 100vh;
+      height: 100vh;
       background: linear-gradient(135deg,#000,#1a1a1a);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 1rem;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 0 20px;
     }
-
-    .hero h2 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero p {
-      color: var(--gray);
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
-      max-width: 600px;
-    }
-
+    .hero h2 {font-size: 3rem; letter-spacing:4px; text-transform:uppercase;}
+    .hero p {color: var(--gray); max-width: 600px;}
     .btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.8rem;
-      background: var(--primary);
-      color: #000;
-      border-radius: 2rem;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.3s ease, background 0.3s ease;
+      display: inline-block; margin-top: 25px;
+      padding: 12px 30px;
+      background: var(--primary); color:#000;
+      border-radius: 30px; font-weight:bold;
+      text-decoration:none; transition:0.3s;
     }
+    .btn:hover {background:#fff; transform:scale(1.05);}
 
-    .btn:hover {
-      background: #fff;
-      transform: scale(1.05);
-    }
+    section {padding:100px 20px; max-width:1100px; margin:auto;}
+    h2 {text-align:center; color:var(--primary); font-size:2.5rem; margin-bottom:40px; text-transform:uppercase;}
 
-    section {
-      padding: 5rem 1rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      margin-bottom: 2rem;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    #about p {
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
-      color: var(--gray);
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
-    }
-
+    /* Shop grid */
     .shop-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
     }
-
     .shop-item {
-      background: #1a1a1a;
-      border-radius: 0.6rem;
-      padding: 1rem;
-      text-align: center;
-      transition: transform 0.3s;
+      background:#1a1a1a;
+      border-radius:8px;
+      padding:20px;
+      text-align:center;
+      transition:transform 0.3s;
     }
-
-    .shop-item:hover { transform: translateY(-5px); }
-
+    .shop-item:hover {transform:translateY(-5px);}
     .shop-item img {
-      width: 100%;
-      height: auto;
-      border-radius: 0.5rem;
-      margin-bottom: 0.8rem;
+      width:100%; border-radius:8px; margin-bottom:15px;
     }
-
-    .price { color: var(--primary); font-weight: bold; margin: 0.3rem 0; }
-
+    .shop-item h3 {color:var(--text-light);}
+    .shop-item p {color:var(--gray);}
+    .price {font-weight:bold; color:var(--primary);}
     .cart-btn {
-      background: var(--primary);
-      border: none;
-      color: #000;
-      padding: 0.6rem 1.2rem;
-      border-radius: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
+      margin-top:10px; padding:10px 20px;
+      background:var(--primary); border:none;
+      color:#000; border-radius:20px; font-weight:bold;
+      cursor:pointer; transition:0.3s;
     }
+    .cart-btn:hover {background:#fff;}
 
-    .cart-btn:hover { background: #fff; }
-
-    #contact {
-      text-align: center;
+    /* Cart Modal */
+    .cart-modal {
+      display:none;
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.9);
+      justify-content:center; align-items:center;
+      z-index:2000;
     }
-
-    #contact a {
-      color: var(--primary);
-      text-decoration: none;
+    .cart-content {
+      background:#111; padding:30px;
+      border-radius:10px; width:90%; max-width:500px;
+      text-align:center;
+      position:relative;
+    }
+    .close-btn {
+      position:absolute; top:10px; right:15px;
+      color:var(--gray); font-size:1.5rem;
+      cursor:pointer;
+    }
+    .cart-items {margin-top:20px; text-align:left;}
+    .cart-items div {
+      display:flex; justify-content:space-between;
+      margin:10px 0; border-bottom:1px solid #333;
+      padding-bottom:10px;
+    }
+    .checkout {
+      margin-top:20px; background:var(--primary);
+      color:#000; border:none; padding:10px 20px;
+      border-radius:20px; font-weight:bold; cursor:pointer;
     }
 
     footer {
-      background: #000;
-      text-align: center;
-      color: var(--gray);
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      margin-top: 3rem;
+      background:#000; text-align:center;
+      color:var(--gray); padding:30px; margin-top:50px;
     }
 
-    /* Cart modal */
-    .cart-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      padding: 1rem;
-    }
-
-    .cart-content {
-      background: #111;
-      padding: 1.5rem;
-      border-radius: 0.7rem;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      position: relative;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px; right: 15px;
-      font-size: 1.5rem;
-      color: var(--gray);
-      cursor: pointer;
-    }
-
-    .cart-items {
-      margin-top: 1rem;
-      text-align: left;
-      font-size: 0.9rem;
-    }
-
-    .cart-items div {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid #333;
-    }
-
-    .checkout {
-      margin-top: 1rem;
-      background: var(--primary);
-      color: #000;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      header { flex-wrap: wrap; justify-content: center; }
-      nav { flex-wrap: wrap; gap: 10px; }
-      .hero p { font-size: 0.95rem; }
-      .shop-item { padding: 0.8rem; }
-      .cart-content { padding: 1rem; }
-    }
+    @keyframes fadeIn {from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
+    .fade-in {animation:fadeIn 1s forwards;}
   </style>
 </head>
 <body>
 
-  <header class="site-header">
-    <img src="assets/logo.png" alt="Bunker Clothing Logo" class="logo">
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#shop">Shop</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#" id="cart-icon">🛒</a>
-    </nav>
+<header>
+  <h1>BUNKER</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#" id="cart-icon">🛒</a>
+  </nav>
 </header>
 
 <section class="hero" id="home">
@@ -270,28 +160,34 @@
   <a href="#shop" class="btn">Shop Now</a>
 </section>
 
-<section id="shop">
+<section id="shop" class="fade-in">
   <h2>Shop</h2>
-  <div class="shop-items" id="product-list"></div>
+  <div class="shop-items" id="product-list">
+    <!-- Items dynamically handled by JS -->
+  </div>
 </section>
 
-<section id="about">
+<section id="about" class="fade-in">
   <h2>About</h2>
-  <p>Bunker Clothing is inspired by real street culture — bold, functional, and comfortable.</p>
+  <p style="text-align:center; max-width:800px; margin:auto; color:var(--gray);">
+    Bunker Clothing is inspired by real street culture -- bold, functional, and comfortable. 
+    Each piece is crafted to move with you and make a statement without saying a word.
+  </p>
 </section>
 
-<section id="contact">
+<section id="contact" class="fade-in" style="text-align:center;">
   <h2>Contact</h2>
-  <p>Email us: <a href="mailto:info@bunkerclothing.com">info@bunkerclothing.com</a></p>
+  <p>Email us: <a href="mailto:info@bunkerclothing.com" style="color:var(--primary); text-decoration:none;">info@bunkerclothing.com</a></p>
   <p>Follow us:
-    <a href="#">Instagram</a> |
-    <a href="#">TikTok</a> |
-    <a href="#">YouTube</a>
+    <a href="#" style="color:var(--primary);">Instagram</a> |
+    <a href="#" style="color:var(--primary);">TikTok</a> |
+    <a href="#" style="color:var(--primary);">YouTube</a>
   </p>
 </section>
 
 <footer>&copy; 2025 Bunker Clothing. All rights reserved.</footer>
 
+<!-- Cart Modal -->
 <div class="cart-modal" id="cart-modal">
   <div class="cart-content">
     <span class="close-btn" id="close-cart">&times;</span>
@@ -303,41 +199,43 @@
 </div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
-
-  const products=[
-    {id:1,name:'Classic Hoodie',price:65,img:'https://images.unsplash.com/photo-1600185365483-26d7a4f8d5c2'},
-    {id:2,name:'Urban Tee',price:30,img:'https://images.unsplash.com/photo-1575936123452-b67c3203c357'},
-    {id:3,name:'Comfy Joggers',price:55,img:'https://images.unsplash.com/photo-1617137968427-85924d2e3d43'},
-    {id:4,name:'Street Cap',price:25,img:'https://images.unsplash.com/photo-1586864387778-4e6a3a76ec5a'}
+  const products = [
+    {id:1, name:'Classic Hoodie', price:65, img:'https://images.unsplash.com/photo-1600185365483-26d7a4f8d5c2'},
+    {id:2, name:'Urban Tee', price:30, img:'https://images.unsplash.com/photo-1575936123452-b67c3203c357'},
+    {id:3, name:'Comfy Joggers', price:55, img:'https://images.unsplash.com/photo-1617137968427-85924d2e3d43'},
+    {id:4, name:'Street Cap', price:25, img:'https://images.unsplash.com/photo-1586864387778-4e6a3a76ec5a'}
   ];
-  const list=document.getElementById('product-list');
-  const cartIcon=document.getElementById('cart-icon');
-  const cartModal=document.getElementById('cart-modal');
-  const closeCart=document.getElementById('close-cart');
-  const cartItems=document.getElementById('cart-items');
-  const cartTotal=document.getElementById('cart-total');
-  let cart=[];
 
+  const list = document.getElementById('product-list');
+  const cartIcon = document.getElementById('cart-icon');
+  const cartModal = document.getElementById('cart-modal');
+  const closeCart = document.getElementById('close-cart');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  let cart = [];
+
+  // Render products
   products.forEach(p=>{
     const item=document.createElement('div');
     item.className='shop-item';
-    item.innerHTML=`<img src="${p.img}" alt="${p.name}">
-      <h3>${p.name}</h3><p class="price">$${p.price}</p>
-      <button class="cart-btn" data-id="${p.id}">Add to Cart</button>`;
+    item.innerHTML=`
+      <img src="${p.img}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p class="price">$${p.price.toFixed(2)}</p>
+      <button class="cart-btn" data-id="${p.id}">Add to Cart</button>
+    `;
     list.appendChild(item);
   });
 
-  document.addEventListener('click',e=>{
-    if(e.target.classList.contains('cart-btn')){
+  // Add to cart
+  document.querySelectorAll('.cart-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
       const id=parseInt(e.target.dataset.id);
       const product=products.find(p=>p.id===id);
       const existing=cart.find(i=>i.id===id);
-      if(existing){existing.qty++} else {cart.push({...product,qty:1});}
+      if(existing){existing.qty++} else {cart.push({...product, qty:1});}
       updateCart();
-    }
+    });
   });
 
   function updateCart(){
@@ -361,8 +259,12 @@
   window.onclick=(e)=>{if(e.target==cartModal)cartModal.style.display='none';};
   document.getElementById('checkout').onclick=()=>{
     alert('Checkout feature coming soon!');
-    cart=[];updateCart();cartModal.style.display='none';
+    cart=[];
+    updateCart();
+    cartModal.style.display='none';
   };
-</script>
+
+<script src="script.js"></script>
+
 </body>
 </html>
