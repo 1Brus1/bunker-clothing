@@ -194,3 +194,31 @@ body {
     color: #000;
     font-weight: bold;
 }
+
+/* GLOBAL UI ANIMATIONS (A4) */
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    animation: sectionReveal .8s ease both;
+}
+
+@keyframes sectionReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons & Links smoother */
+button, a {
+    transition: .25s ease;
+}
+
+/* Soft hover lift effect for product cards */
+.shop-item {
+    transition: transform .25s ease, opacity .25s;
+}
+.shop-item:hover {
+    transform: translateY(-6px);
+    opacity: 0.9;
+}
