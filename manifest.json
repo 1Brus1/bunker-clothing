@@ -1,1 +1,8 @@
-{"Title\n\n\nHello World": null}
+{
+  "name": "Bunker Clothing",
+  "short_name": "Bunker",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff88"
+}
