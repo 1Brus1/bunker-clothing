@@ -40,8 +40,8 @@ header {
 }
 
 .logo-container img {
-  height: 70px;             /* Adjust logo size */
-  width: auto;
+  height: 40px;             /* Adjust logo size */
+  width: 20;
   filter: drop-shadow(0 0 12px rgba(255, 0, 0, 0.35))
           drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
   transition: 0.25s ease;
