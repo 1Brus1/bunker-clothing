@@ -1,61 +1,92 @@
-// PRODUCT DATA
-const products = [
-    { id: 1, name: "Bunker Hoodie", price: 65, img: "https://images.unsplash.com/photo-1600185365483-26d7a4f8d5c2" },
-    { id: 2, name: "Urban Tee", price: 30, img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357" },
-    { id: 3, name: "Comfy Joggers", price: 55, img: "https://images.unsplash.com/photo-1617137968427-85924d2e3d43" },
-];
+// Bunker Clothing — Cinematic JS
 
-// RENDER PRODUCTS
-const productList = document.getElementById("product-list");
-products.forEach(p => {
-    productList.innerHTML += `
-        <div class="product-box">
-            <img src="${p.img}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <p>$${p.price}</p>
-            <button onclick="addToCart(${p.id})" class="btn">Add to Cart</button>
-        </div>
-    `;
+// Helper: is touch device
+const isTouch = matchMedia('(hover:none), (pointer:coarse)').matches;
+
+// A12.1: Sticky shrink on scroll + progress bar (A17.2)
+const header = document.querySelector('.site-header');
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 30) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+
+  const doc = document.documentElement;
+  const scrolled = (doc.scrollTop) / (doc.scrollHeight - doc.clientHeight) * 100;
+  progressBar.style.width = scrolled + '%';
 });
 
-// CART LOGIC
-let cart = [];
-const modal = document.getElementById("cart-modal");
-const cartBtn = document.getElementById("cart-btn");
-const closeCart = document.getElementById("close-cart");
-const cartItems = document.getElementById("cart-items");
-const totalPrice = document.getElementById("total-price");
-
-cartBtn.onclick = () => modal.style.display = "flex";
-closeCart.onclick = () => modal.style.display = "none";
-
-function addToCart(id) {
-    let item = products.find(p => p.id === id);
-    let exists = cart.find(c => c.id === id);
-
-    if (exists) exists.qty++;
-    else cart.push({ ...item, qty: 1 });
-
-    renderCart();
-}
-
-function renderCart() {
-    cartItems.innerHTML = "";
-    let total = 0;
-
-    cart.forEach(c => {
-        total += c.qty * c.price;
-        cartItems.innerHTML += `
-            <p>${c.name} x${c.qty} - $${c.qty * c.price}</p>
-        `;
+// A17.1: White preloader → reveal header + hero
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  setTimeout(() => {
+    preloader.classList.add('hidden');
+    // Header reveal
+    document.querySelector('.site-header').classList.add('revealed');
+    // Hero stagger reveals
+    const title = document.querySelector('.hero-title');
+    const subtitle = document.querySelector('.hero-subtitle');
+    const cta = document.querySelector('.hero-btn');
+    requestAnimationFrame(()=>{
+      title.style.opacity = 1; title.style.transform = 'translateY(0)';
+      setTimeout(()=>{ subtitle.style.opacity = 1; subtitle.style.transform = 'translateY(0)'; }, 150);
+      setTimeout(()=>{ cta.style.opacity = 1; cta.style.transform = 'translateY(0)'; }, 300);
     });
+  }, 1200);
+});
 
-    totalPrice.innerText = `Total: $${total}`;
+// A13.1: Reveal sections on scroll
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); }});
+},{threshold:0.15});
+document.querySelectorAll('.section-animate').forEach(sec=>observer.observe(sec));
+
+// A17.3: Back-to-top
+const backBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', ()=>{
+  if (window.scrollY > 400) backBtn.classList.add('show'); else backBtn.classList.remove('show');
+});
+backBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+// A17.4: Cursor glow FX (desktop only)
+const cursor = document.getElementById('cursor');
+if (!isTouch) {
+  document.body.classList.remove('no-cursorfx');
+  let x=0,y=0, tx=0, ty=0;
+  const speed = 0.18;
+  function animate(){
+    tx += (x - tx) * speed;
+    ty += (y - ty) * speed;
+    cursor.style.transform = `translate(${tx}px, ${ty}px)`;
+    requestAnimationFrame(animate);
+  }
+  window.addEventListener('mousemove', e=>{ x=e.clientX; y=e.clientY; });
+  animate();
+} else {
+  document.body.classList.add('no-cursorfx');
 }
 
+// A17.5: Animation toggle switch
+const animSwitch = document.getElementById('animSwitch');
+const animStateText = document.getElementById('animState');
 
-/* A9 Improved shop interactions */
-document.querySelectorAll('.shop-item').forEach(it=>{
- it.addEventListener('touchstart',()=>it.style.opacity='0.8');
- it.addEventListener('touchend',()=>it.style.opacity='1');
+// Load saved pref
+const saved = localStorage.getItem('bunker_anim_enabled');
+const enabled = saved === null ? true : saved === 'true';
+animSwitch.checked = enabled;
+setAnim(enabled);
+
+animSwitch.addEventListener('change', ()=>{
+  const on = animSwitch.checked;
+  setAnim(on);
+  localStorage.setItem('bunker_anim_enabled', String(on));
+  // small pulse handled by CSS active state
 });
+
+function setAnim(on){
+  if (on){
+    document.body.classList.remove('anim-off');
+    animStateText.textContent = 'ON';
+  } else {
+    document.body.classList.add('anim-off');
+    animStateText.textContent = 'OFF';
+  }
+}
